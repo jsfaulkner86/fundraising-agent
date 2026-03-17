@@ -1,43 +1,59 @@
-# Raise Ready – Fundraising Co‑Founder Agent for Women's Health Startups
+# Fundraising Agent
 
-Raise Ready is an agentic AI workflow that helps women's health founders sharpen their investor narrative and identify gaps in their pitch materials before they go out to raise.
+> **Agentic AI** — Helps women's health founders sharpen their investor narrative
 
-It is designed as a **co‑founder‑style assistant**: it reads your deck text, diagnoses what today’s health/AI investors expect to see at your stage, and proposes a clearer, more compelling story. It does **not** invent metrics or outcomes.
+[![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)]()
+[![Agentic AI](https://img.shields.io/badge/Agentic-AI-6B46C1?style=flat-square)]()
+[![Women's Health](https://img.shields.io/badge/Women's-Health-E91E8C?style=flat-square)]()
+[![Healthcare AI](https://img.shields.io/badge/Healthcare-AI-red?style=flat-square)]()
+
+## The Problem
+
+Women's health founders are often building in a sector investors don't fully understand. The technology may be strong, but the narrative — market size framing, clinical validation positioning, go-to-market storytelling — often falls flat in investor meetings. This agent closes that gap.
+
+## What It Does
+
+An AI advisory agent that:
+- Reviews founder pitch context and identifies narrative weaknesses
+- Reframes market opportunity using women's health-specific framing
+- Strengthens clinical validation and evidence positioning
+- Generates sharpened investor narrative sections ready for deck integration
+- Provides tailored feedback based on investor type (VC, strategic, angel)
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Agent Framework | Python + LLM orchestration |
+| LLM | OpenAI GPT-4 |
+| Language | Python 3.11+ |
+
+## Getting Started
+
+```bash
+git clone https://github.com/jsfaulkner86/fundraising-agent
+cd fundraising-agent
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env
+python main.py
+```
+
+## Environment Variables
+
+```
+OPENAI_API_KEY=your_key_here
+```
+
+## Background
+
+Built by [John Faulkner](https://linkedin.com/in/johnathonfaulkner), founder of [The Faulkner Group](https://thefaulknergroupadvisors.com). Draws from direct advisory experience helping early-stage women's health tech founders prepare for institutional fundraising.
+
+## What's Next
+- Investor persona profiles for tailored narrative tuning
+- Pitch deck section generator with slide-ready output
+- Integration with the Women's Health Fundraising Tracker
 
 ---
-
-## What This Agent Does
-
-- Parses a pitch deck text dump into structured sections (Problem, Solution, Market, Traction, Team, AI story, GTM, Financials, Ask).
-- Performs a stage‑aware gap analysis (e.g., pre‑seed vs seed) against a lightweight fundraising checklist.
-- Highlights missing or weak sections with explanations tailored to **women’s health and digital health**.
-- Optionally generates a revised narrative outline and investor‑profile‑specific talking points.
-
-This repo is the **portfolio implementation** for The Faulkner Group’s “Raise Ready” service.
-
----
-
-## Architecture
-
-Raise Ready is implemented as a small LangGraph workflow:
-
-1. **IngestionAgent**
-   - Input: raw deck text (e.g., exported from slides or pasted).
-   - Output: structured `deck_analysis` JSON (sections and raw text).
-
-2. **GapAnalysisAgent**
-   - Input: `deck_analysis` + stage checklist.
-   - Output: `gap_analysis` JSON (section reviews, missing sections, risk flags, overall comment).
-
-3. **(Optional) NarrativeAgent**
-   - Input: `deck_analysis` + `gap_analysis`.
-   - Output: `narrative_outline` JSON (revised slide sequence and bullets).
-
-State is passed through a simple `FundraiseState` object:
-
-```python
-class FundraiseState(TypedDict):
-    deck_text: str
-    deck_analysis: Dict[str, Any]
-    gap_analysis: Dict[str, Any]
-    narrative_outline: Dict[str, Any]
+*Part of The Faulkner Group's advisory AI toolset. See all projects at [github.com/jsfaulkner86](https://github.com/jsfaulkner86)*
